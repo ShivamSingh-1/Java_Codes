@@ -6,7 +6,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+
 
 public class Employee extends User {
 	
@@ -59,16 +60,25 @@ public class Employee extends User {
 	
        List<Employee> emp = new ArrayList<Employee>();
 		
-	  for(User ob: ls){    //filtering employees from list of users
-		  
-		  if(ob instanceof Employee){
-			  
-			  emp.add((Employee)ob);
-			  
-		  }
-		  
-	  }
-	  
+//	  for(User ob: ls){    //filtering employees from list of users
+//		  
+//		  if(ob instanceof Employee){
+//			  
+//			  emp.add((Employee)ob);
+//			  
+//		  }
+//		  
+//	  }
+//	  
+       
+        emp = ls                             //Now filtering employees from list of users using Stream
+    		  .stream()
+    		  .filter(e -> e instanceof Employee)
+    		  .map(e -> (Employee)e)
+    		  .collect(Collectors.toList());
+       
+       
+       
 	  Collections.sort(emp,new Comparator<Employee>() {   //sorting "emp" using custom comparator
 
 		@Override
