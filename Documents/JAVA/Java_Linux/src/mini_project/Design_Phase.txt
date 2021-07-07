@@ -1,0 +1,19 @@
+  "Banking System"
+  
+  Design phase:--
+  
+  *For the purpose of maintaining customer account details we need to store their data in a well suited data structure.
+  
+  *For above purpose we will be using ArrayList from Java's Collection Framework, and in this ArrayList we will be storing the object of type "Customer".
+  
+  *The Customer Object will have many fields associated with it like Customer_ID, Customer_Name, Balance, Address, Loan_status,Tansactions etc. So, we will be creating Customer class with these required fields.
+  
+  *For the Credit/Debit  operation, we will require "Customer_ID" as a unique way to identify from which account we have to take money (Debit) and also to which account we have to tranfer (Credit). 
+  
+  *We will also be using additional classes which will be attached to the main (Superclass) Customer like Transactions Class for maintaining the transaction       infromation of each customer individually.
+  
+  *Transaction Class will have fields like ArrayList (for storing total transaction details for a particular employee credit/debit/failed/aborted),this Arraylist will have objects of type String for maintaining information regarding each transaction.
+  
+  *We will also be using custom comparator for fetching results of customers based on a particular condition like (ex-> Fetching the customers values in descending order of their total transactions they did),  etc.
+  
+  
