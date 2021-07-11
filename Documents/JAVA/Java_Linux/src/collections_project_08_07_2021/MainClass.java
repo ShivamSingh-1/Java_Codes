@@ -1,6 +1,7 @@
 package collections_project_08_07_2021;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 
@@ -84,40 +85,79 @@ public class MainClass {
 		 */
 		
 		
-	List<NewAddress> ans = new ArrayList<>();	
+//	List<NewAddress> ans = new ArrayList<>();	
+//		
+//      for(Structure st : uniqueCity){      //Adding users to a particular address
+//			
+//    	  String str = st.getCity();
+//    	  
+//    	  ans.add(new NewAddress(st,new ArrayList<User>()));
+//    	  
+//    	  for(User obj : lss){
+//    		  
+//    		  for(Structure objj : obj.getAddress().getLs()) {
+//    			  
+//    			  if(objj.getCity().equals(str)){
+//    				  
+//    				  int idx = (ans.size() - 1); 
+//    				  
+//    				  ans.get(idx).getLs().add(obj);
+//    				  
+//    				  
+//    			  }
+//    			  
+//    			  
+//    		  }
+//    		  
+//    	  }
+    	  
 		
-      for(Structure st : uniqueCity){      //Adding users to a particular address
-			
-    	  String str = st.getCity();
+		// Now we will use Map to store the new structure in HashMap
+		
+    	  Map<Structure,List<User>> hm = new HashMap<>();	
     	  
-    	  ans.add(new NewAddress(st,new ArrayList<User>()));
+    	  for(Structure st : uniqueCity){      //Adding users to a particular address
+  			
+        	  String str = st.getCity();
+        	  
+        	//  ans.add(new NewAddress(st,new ArrayList<User>()));
+        	  
+        	hm.put(st,new ArrayList<>());  
+        	  
+        	  for(User obj : lss){
+        		  
+        		  for(Structure objj : obj.getAddress().getLs()) {
+        			  
+        			  if(objj.getCity().equals(str)){
+        				  
+        				 // int idx = (ans.size() - 1); 
+        				 
+        				  List<User> lis = hm.get(st);
+        				  
+        				//  ans.get(idx).getLs().add(obj);
+        				  
+        				  lis.add(obj);
+        				  
+        				  
+        			  }
+        			  
+        			  
+        		  }
+        		  
+        	  }
     	  
-    	  for(User obj : lss){
-    		  
-    		  for(Structure objj : obj.getAddress().getLs()) {
-    			  
-    			  if(objj.getCity().equals(str)){
-    				  
-    				  int idx = (ans.size() - 1); 
-    				  
-    				  ans.get(idx).getLs().add(obj);
-    				  
-    				  
-    			  }
-    			  
-    			  
-    		  }
-    		  
-    	  }
     	  
-    	  int idx = (ans.size() - 1); 
+    	//  int idx = (ans.size() - 1); 
+        	  
+        	List<User> lis = hm.get(st);  
     	  
-    	  Collections.sort(ans.get(idx).getLs(), new Comparator<User>() {  //sorting Users according to their UserIds
+    	  Collections.sort(lis, new Comparator<User>() {  //sorting Users according to their UserIds
 
 			@Override
 			public int compare(User o1, User o2) {
 				
 				return (o1.getId() - o2.getId());
+				
 				
 				
 			}
@@ -126,23 +166,45 @@ public class MainClass {
     
 		}
       
-      System.out.println("Structure After:-->"); 
-      
-       for(NewAddress obj : ans){
-    	   
-    	   System.out.print("City:-> " + obj.getStructure().getCity()  + " " + "Zipcode:-> " + obj.getStructure().getZipcode() + "    ");
-    	   
-    	   System.out.print("Users:->  ");
-    	   
-    	   for(User objj : obj.getLs()){
-    		   
-    		   System.out.print("[ " + "User ID:-> " + objj.getId() + " "+ "User Name:-> " + objj.getName() + " ]");
-    		   
-    	   }
-    	   
-    	   System.out.println();
-    	   
-       }
+//      System.out.println("Structure After:-->"); 
+//      
+//       for(NewAddress obj : ans){
+//    	   
+//    	   System.out.print("City:-> " + obj.getStructure().getCity()  + " " + "Zipcode:-> " + obj.getStructure().getZipcode() + "    ");
+//    	   
+//    	   System.out.print("Users:->  ");
+//    	   
+//    	   for(User objj : obj.getLs()){
+//    		   
+//    		   System.out.print("[ " + "User ID:-> " + objj.getId() + " "+ "User Name:-> " + objj.getName() + " ]");
+//    		   
+//    	   }
+//    	   
+//    	   System.out.println();
+//    	   
+//       }
+    	  
+    	  System.out.println("Structure After:-->"); 
+          
+          for(Entry<Structure, List<User>> obj : hm.entrySet()){
+       	   
+       	   Structure objj = obj.getKey();
+       	   
+       	   System.out.print("City:-> " + objj.getCity()  + " " + "Zipcode:-> " + objj.getZipcode() + "    ");
+       	   
+       	   System.out.print("Users:->  ");
+       	   
+       	   List<User> les = obj.getValue();
+       	   
+       	   for(User obje : les){
+       		   
+       		   System.out.print("[ " + "User ID:-> " + obje.getId() + " "+ "User Name:-> " + obje.getName() + " ]");
+       		   
+       	   }
+       	   
+       	   System.out.println();
+       	   
+          }
       	
 
 	}
