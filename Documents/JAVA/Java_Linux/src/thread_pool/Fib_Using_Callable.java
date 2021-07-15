@@ -1,6 +1,5 @@
 package thread_pool;
 
-import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -50,23 +49,26 @@ class MyCallable implements Callable<String>{
 		int a = 0;
 		int b = 1;
 	    int c = 0;
+	    int sum = 1;
 	    
-	    str = "0_1";
+	    str = "0 + 1";
 		
-		for(int i = 1; i <= 15; i++){
+		for(int i = 3; i <= 7; i++){
 			
-			Thread.sleep(500);
-			
+			Thread.sleep(100);
 			System.out.println(Thread.currentThread().getName());
 			
 			c = (a + b);
+			sum += c;
 			
-			str = str + "_" + c;
-			
+			str = str + " + " + c;
+		
 			a = b;
 			b = c;
 			
 		}
+		
+		str = str + " = " + sum;
 		
 		return str;
 		
