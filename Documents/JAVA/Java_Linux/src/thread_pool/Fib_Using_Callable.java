@@ -5,6 +5,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+//Assignment - 1
+import java.util.concurrent.TimeoutException;
 
 public class Fib_Using_Callable {
 
@@ -16,16 +19,25 @@ public class Fib_Using_Callable {
 		
 		Future<String> fut = service.submit(call);
 		
+		System.out.println(fut.isCancelled());
+		
 		try {
 			Thread.sleep(500);
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
 		try{
-
-            System.out.println("Fibonacci Using Future :--  "+ fut.get());
+			
+            try {
+				System.out.println("Fibonacci Using Future :--  "+ fut.get(400, TimeUnit.MILLISECONDS ));
+			} catch (TimeoutException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
         }catch (InterruptedException | ExecutionException ex){
             ex.printStackTrace();
@@ -53,9 +65,8 @@ class MyCallable implements Callable<String>{
 	    
 	    str = "0 + 1";
 		
-		for(int i = 3; i <= 7; i++){
+		for(int i = 3; i <= 10; i++){
 			
-			Thread.sleep(100);
 			System.out.println(Thread.currentThread().getName());
 			
 			c = (a + b);
@@ -65,6 +76,8 @@ class MyCallable implements Callable<String>{
 		
 			a = b;
 			b = c;
+			
+			Thread.sleep(100);
 			
 		}
 		
