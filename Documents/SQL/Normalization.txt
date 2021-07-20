@@ -1,0 +1,80 @@
+
+
+-> Let Functional dependencies are as follows -> (1) (Id,Company) --> (Cost_incurred_in_project)
+  							                    (2) (Project)  --> (Cost_incurred_in_project,Name)
+  							  
+  							  
+  So, According to above functional dependencies we have following Candidate Key:
+  
+  CK :- (ID,Project,Company)		
+  
+  therefore, prime attributes :- Id,Company,Project
+             non-prime attributes :- Cost_incurred_in_project,Name					  
+
+Que:->  Table :-> Employee
+  
+   Id 	Name 	Project 	Company 	Cost_incurred_in_project
+   1	user1	p1			abc,xyz			1000
+   2    user2   p2          def				2000
+   3    user3   p2          def             2000
+   4    user4   p3          lmn             5000
+   5    user5   p4          opq             4000
+
+  For 1NF :-- No multivalued attributes:-
+  
+   Id 	Name 	Project 	Company 	Cost_incurred_in_project
+   1	user1	p1			abc 			1000
+   1	user1	p1			xyz	     		1000
+   2    user2   p2          def				2000
+   3    user3   p2          def             2000
+   4    user4   p3          lmn             5000
+   5    user5   p4          opq             4000    //Now it is in 1NF
+  
+  For 2NF :- No partial dependency :-
+  
+  Above table is not in 2NF as part of candidate key is finding some attributes. 
+     
+   (Project)  --> (Cost_incurred_in_project,Name) "This is partial dependency "
+   
+   For removing above partial dependency we have to split our table untill no partial dependency exists in subsequent tables.
+  
+  converting to 2NF:--
+  
+    Name 	Project 	 Cost_incurred_in_project            //Table 1         
+   	user1	p1				1000
+   	user1	p1			  	1000
+    user2   p2          	2000
+    user3   p2              2000
+    user4   p3              5000
+    user5   p4              4000 
+   
+  
+   Id 	 Project 	Company 	Cost_incurred_in_project     //Table 2
+   1	   p1		   abc 			    1000
+   1	   p1		   xyz	     	    1000
+   2       p2          def				2000
+   3       p2          def              2000
+   4       p3          lmn              5000
+   5       p4          opq              4000             //Now in 2NF
+  
+  
+  For 3NF :- No transitive dependency :-
+  
+  Transitive Dependency :-- if (X --> Y), then X and Y both are non-prime attributes .
+  
+   Above both relations are in 3NF as following dependency:--  (ID,Project,Company) --> (Cost_incurred_in_project) "this is not a transitive dependency" in    table 2.
+   
+   Above both relations are in 3NF as following dependency:--  (Project) --> (Name,Cost_incurred_in_project) "this is not a transitive dependency" in    table 1.
+   
+   So,above both relations are in 3NF
+  
+   For BCNF(3.5 NF) :-  if (X --> Y), then X should be a super key:-- 
+   
+   Above both realtions satisfy these constraints so above two tables are in BCNF. 
+   
+   For 4NF :- there should not be any multivalued dependency. if(X ->> Y), for single value of X more than one value of Y exists. 
+   
+   Above both realtions satisfy these constraints so above two tables are in 4NF. 
+   
+   
+  
